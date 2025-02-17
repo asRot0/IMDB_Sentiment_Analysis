@@ -37,14 +37,42 @@ Each review is labeled as **positive** or **negative**, making it a **binary cla
 
 ---
 
-## Model Performance Comparison
+## Model Evaluation & Insights
 
-| Model           | Accuracy (Subset) | Accuracy (Full) |
-|---------------|----------------|---------------|
-| **KNN**        | XX%            | XX%          |
-| **SVM**        | XX%            | XX%          |
-| **Random Forest** | XX%            | XX%          |
-| **XGBoost**    | XX%            | XX%          |
+To understand model effectiveness, we analyzed **confusion matrices** and **classification reports** for each model. Below are some key insights:
+
+### 🔹 **K-Nearest Neighbors (KNN)**
+- Performed **poorly** due to the high-dimensional sparse nature of text data.
+- Struggled with decision boundaries, leading to **low accuracy**.
+
+### 🔹 **Support Vector Machine (SVM)**
+- Provided **decent performance** with good generalization.
+- However, training time was relatively **slow** on a large dataset.
+
+### 🔹 **Random Forest**
+- Showed **strong results**, handling non-linear relationships well.
+- Benefited from **ensemble learning**, but had slightly **higher training time**.
+
+### 🔹 **XGBoost**
+- Achieved the **best accuracy**, excelling in feature selection & boosting weak learners.
+- Benefited significantly from **hyperparameter tuning**.
+- Final model trained on **full dataset** after parameter optimization.
+
+### **Visualizing Model Results**
+Here’s a heatmap of the **best model’s confusion matrix**:
+
+```python
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.metrics import confusion_matrix
+
+cm = confusion_matrix(y_test, y_pred_final)
+sns.heatmap(cm, annot=True, fmt='g', cmap="Blues")
+plt.title("Best Model (XGBoost) - Confusion Matrix")
+plt.xlabel("Predicted")
+plt.ylabel("Actual")
+plt.show()
+```
 
 > **Note**: Hyperparameter tuning was performed on the best-performing model before final training.
 
